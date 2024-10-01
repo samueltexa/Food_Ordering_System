@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../../public/assets/css/login_register.css">
+    <style>
+       .back-home {
+            color: #FFFFFF;
+            text-decoration: underline;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .back-home:hover {
+           color: green;
+        }
+    </style>
 </head>
 
 <body>
@@ -44,13 +55,12 @@
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <a href="../../index.html" class="back-home">Back Home</a> <!-- Added Back Home link -->
                     <h1>Order with Ease</h1>
                     <p>Enjoy meals together with loved ones</p>
                     <button class="ghost" id="signIn">SIGN IN</button>
                 </div>
                 <div class="overlay-panel overlay-right">
-                    <a href="../../index.html" class="back-home">Back Home</a> <!-- Added Back Home link -->
+                <a href="home.php" class="back-home">Back home</a>
                     <h1>Welcome, Food Lover!</h1>
                     <p>Enter your details and dive into a world of flavors!</p>
                     <button class="ghost" id="signUp">REGISTER</button>
