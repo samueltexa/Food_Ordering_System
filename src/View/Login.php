@@ -44,11 +44,13 @@
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
+                    <a href="../../index.html" class="back-home">Back Home</a> <!-- Added Back Home link -->
                     <h1>Order with Ease</h1>
                     <p>Enjoy meals together with loved ones</p>
                     <button class="ghost" id="signIn">SIGN IN</button>
                 </div>
                 <div class="overlay-panel overlay-right">
+                    <a href="../../index.html" class="back-home">Back Home</a> <!-- Added Back Home link -->
                     <h1>Welcome, Food Lover!</h1>
                     <p>Enter your details and dive into a world of flavors!</p>
                     <button class="ghost" id="signUp">REGISTER</button>
