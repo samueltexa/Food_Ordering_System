@@ -1,118 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-
-        .Login_Section {
-            background-color: #ffffff;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            width: 350px;
-            text-align: center;
-        }
-
-        form div {
-            margin-bottom: 20px;
-        }
-
-        img {
-            width: 100px;
-        }
-
-        h1 {
-            font-size: 24px;
-            color: #333;
-        }
-
-        h4 {
-            font-size: 16px;
-            color: #666;
-        }
-
-        input[type='text'], input[type='password'] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        a {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .Login_Section a {
-            display: block;
-            margin: 10px 0;
-        }
-    </style>
+    <link rel="stylesheet" href="../../public/assets/css/login_register.css">
 </head>
-
 <body>
-    <section class="Login_Section">
-        <form>
-            <div>
-                <img src="../../public/images/logo.png" alt="FeastHive Logo">
-            </div>
-            <div>
-                <h1>Welcome To FeastHive</h1>
-                <h4>Log into your account</h4>
-            </div>
-            <div>
-                <input type='text' placeholder="Enter email or username">
-            </div>
-            <div>
-                <input type='password' placeholder="Enter password">
-            </div>
-            <button type='submit'>Login</button>
-            <a href='#'>Forgot password?</a>
-            <h4>Don't have an account?</h4>
-            <a href='#'>Register</a>
+
+<div class="container" id="container">
+    <!-- login form -->
+    <div class="form-container sign-in-container">
+        <form id="login-form">
+            <h1>Sign in</h1>
+            <img class="logo" src="../../public/images/logo.png">
+            <input type="user" id="login_username" placeholder="Username or email"/>
+            <div class="error-message" id="username_error_message"></div>
+            <input type="password" id="login_password" placeholder="Password"/>
+            <div class="error-message" id="password_error_message"></div>
+            <a href="forgot_password.php">Forgot your password?</a>
+            <button type="submit" name="login">SIGN IN</button>
         </form>
-    </section>
-
+    </div>
+    <!-- register form -->
+    <div class="form-container sign-up-container">
+        <form id="sign-up-form">
+            <h1>Create Account</h1>
+            <img class="logo" src="../../public/images/logo.png">
+            <input type="text" name="username" id="register_username" placeholder="Enter username"/>
+            <div class="error-message" id="register_username_error_message"></div>
+            <input type="text" name="email" id="email" placeholder="Enter email"/>
+            <div class="error-message" id="email_error_message"></div>
+            <input type="password" name="password" id="register_password" placeholder="Enter password"/>
+            <div class="error-message" id="register_password_error_message"></div>
+            <input type="password" name="confirm_password" id="confirm-password" placeholder="Confirm password"/>
+            <div class="error-message" id="confirm_password_error_message"></div>
+            <button type="submit" name="signup">REGISTER</button>
+        </form>
+    </div>
+    <!-- Quick Access -->
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Order with Ease</h1>
+                <p>Enjoy meals together with loved ones</p>
+                <button class="ghost" id="signIn">SIGN IN</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Welcome, Food Lover!</h1>
+                <p>Enter your details and dive into a world of flavors!</p>
+                <button class="ghost" id="signUp">REGISTER</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../public/assets/js/main.js"></script>
 </body>
-
 </html>
