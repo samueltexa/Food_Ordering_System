@@ -228,3 +228,24 @@ h1 {
 .back-to-login a {
     text-decoration: underline;
 }
+
+footer {
+    background-color: #2d3741; /* Light background for the footer */
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around; /* Distribute space evenly */
+}
+
+.developers, .contact-info {
+    width: 45%; /* Set the width for each column */
+}
+
+.footer-bottom {
+    background-color: #1f252b; /* Slightly darker background for the bottom */
+    padding: 10px 0; /* Padding for the bottom section */
+    margin-top: 20px; /* Space between the columns and the bottom */
+}
