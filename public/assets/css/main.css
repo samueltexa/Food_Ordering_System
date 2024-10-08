@@ -118,13 +118,6 @@ section {
     color: #ff6347;
 }
 
-footer {
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
-
 
 .hero-button {
     display: flex;
@@ -230,22 +223,29 @@ h1 {
 }
 
 footer {
-    background-color: #2d3741; /* Light background for the footer */
+    background-color: #7c848d;
+    color: white;
     padding: 20px;
     text-align: center;
 }
 
 .footer-container {
     display: flex;
-    justify-content: space-around; /* Distribute space evenly */
+    justify-content: space-around;
 }
 
 .developers, .contact-info {
-    width: 45%; /* Set the width for each column */
+    width: 45%;
 }
 
 .footer-bottom {
-    background-color: #1f252b; /* Slightly darker background for the bottom */
-    padding: 10px 0; /* Padding for the bottom section */
-    margin-top: 20px; /* Space between the columns and the bottom */
+    background-color: #afb7be;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none; 
+    padding: 0;
+    margin: 0;
 }
