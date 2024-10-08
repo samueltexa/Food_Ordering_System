@@ -106,10 +106,7 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer>
-        <p class="paragraph">&copy; 2024 FeastHive. All rights reserved.</p>
-    </footer>
+    <?php include '/src/components/footer.php'; ?> <!-- Include the footer -->
 </body>
 
 </html>
