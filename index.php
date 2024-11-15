@@ -96,7 +96,7 @@
                 <h3>Fried Turkey</h3>
             </div>
             <div class="dish">
-                <img class="image" src="public/images/Avocado.jpeg" alt="Dish 3">
+                <img class="image" src="./public/images/Avocado.jpeg" alt="Dish 3">
                 <h3>Ovacado Toast</h3>
             </div>
             <div class="dish">
