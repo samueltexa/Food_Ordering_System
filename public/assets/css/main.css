@@ -222,30 +222,4 @@ h1 {
     text-decoration: underline;
 }
 
-footer {
-    background-color: #7c848d;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
 
-.footer-container {
-    display: flex;
-    justify-content: space-around;
-}
-
-.developers, .contact-info {
-    width: 45%;
-}
-
-.footer-bottom {
-    background-color: #afb7be;
-    padding: 10px 0;
-    margin-top: 20px;
-}
-
-ul {
-    list-style-type: none; 
-    padding: 0;
-    margin: 0;
-}
