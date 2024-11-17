@@ -12,7 +12,7 @@
 <body>
     <!-- Header Section -->
     <?php include 'src/components/header.php'; ?>
-
+    
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-button">
@@ -37,53 +37,92 @@
     <section>
         <h2>Featured Dishes</h2>
         <div class="dishes-container">
-            <div class="dish">
-                <img class="image" src="public/images/chicken.jpg" alt="Dish 1">
-                <h3>Spicy Chicken Wings</h3>
-                <p>Succulent chicken wings with a spicy kick.</p>
-            </div>
-            <div class="dish">
-                <img class="image" src="public/images/burger.jpg" alt="Dish 2">
-                <h3>Classic Cheeseburger</h3>
-                <p>Juicy beef patty with melted cheese and fresh toppings.</p>
-            </div>
-            <div class="dish">
-                <img class="image" src="public/images/pizza.jpeg" alt="Dish 3">
-                <h3>Vegetarian Pizza</h3>
-                <p>A delightful mix of fresh veggies and gooey cheese.</p>
-            </div>
-            <div class="dish">
-                <img class="image" src="public/images/fish.jpeg" alt="Dish 3">
-                <h3>Fried Fish</h3>
-                <p>Golden-brown fried fish served with vegetables and lemon wedges</p>
-            </div>
+            <?php
+            include 'config/db_connection.php';
+
+            // Query to fetch featured dishes
+            $sql = "SELECT imagePath, description, imageName FROM images LIMIT 4";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<div class="dish" onclick="openModal(\'' . htmlspecialchars($row['imageName']) . '\', \'' . htmlspecialchars($row['description']) . '\', \'' . $row['imagePath'] . '\')">';
+                    echo '<img class="image" src="' . $row['imagePath'] . '" alt="Dish">';
+                    echo '<h3>' . htmlspecialchars($row['imageName']) . '</h3>';
+                    echo '</div>';
+                }
+            } else {
+                echo '<p>No featured dishes found.</p>';
+            }
+
+            $conn->close();
+            ?>
         </div>
     </section>
 
-    <!-- Recently searched -->
+    <!-- Recently Searched Section -->
     <section>
-        <h2>Recently searched</h2>
+        <h2>Recently Searched</h2>
         <div class="dishes-container">
-            <div class="dish">
-                <img class="image" src="public/images/Pancakes.jpeg" alt="Dish 1">
-                <h3>Pancakes</h3>
-            </div>
-            <div class="dish">
-                <img class="image" src="public/images/Turkey.jpeg" alt="Dish 2">
-                <h3>Fried Turkey</h3>
-            </div>
-            <div class="dish">
-                <img class="image" src="./public/images/Avocado.jpeg" alt="Dish 3">
-                <h3>Ovacado Toast</h3>
-            </div>
-            <div class="dish">
-                <img class="image" src="public/images/Rolex.jpeg" alt="Dish 3">
-                <h3>Rolex</h3>
-            </div>
+            <?php
+            include 'config/db_connection.php';
+
+            // Query to fetch recently searched dishes
+            $sql = "SELECT imagePath, description, imageName FROM images ORDER BY id DESC LIMIT 4";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<div class="dish" onclick="openModal(\'' . htmlspecialchars($row['imageName']) . '\', \'' . htmlspecialchars($row['description']) . '\', \'' . $row['imagePath'] . '\')">';
+                    echo '<img class="image" src="' . $row['imagePath'] . '" alt="Dish">';
+                    echo '<h3>' . htmlspecialchars($row['imageName']) . '</h3>';
+                    echo '</div>';
+                }
+            } else {
+                echo '<p>No recently searched dishes found.</p>';
+            }
+
+            $conn->close();
+            ?>
         </div>
     </section>
+
+    <!-- Modal Structure -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Dish">
+            <div class="modal-details">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <p id="modalDescription"></p>
+                <a href="src/View/menu.php" class="go-to-menu-btn">Go to Menu</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, description, imagePath) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDescription').innerText = description;
+            document.getElementById('modalImage').src = imagePath;
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
 
     <?php include 'src/components/footer.php'; ?>
 </body>
 
 </html>
+
