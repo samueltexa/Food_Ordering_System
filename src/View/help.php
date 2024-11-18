@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <?php include '../components/header.php'; ?>
 
     <h1>How to Place an Order</h1>
 
