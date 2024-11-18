@@ -5,83 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="public/assets/css/main.css">
-    <style>
-        body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-
-.menu-section {
-    padding: 20px;
-}
-
-.menu-section h2 {
-    margin: 20px 0;
-    font-size: 24px;
-    color: #ff5722;
-}
-
-.menu-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.menu-item {
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 30%;
-    padding: 10px;
-    text-align: center;
-    position: relative;
-}
-
-.menu-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-.menu-item h3 {
-    margin: 10px 0;
-    font-size: 18px;
-    color: #333;
-}
-
-.menu-item p {
-    font-size: 14px;
-    color: #666;
-}
-
-.menu-item span {
-    font-weight: bold;
-    color: #ff5722;
-    display: block;
-    margin-top: 10px;
-}
-
-.add-button {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background-color: #ff5722;
-    border: none;
-    color: white;
-    font-size: 18px;
-    padding: 5px 10px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.add-button:hover {
-    background-color: #e64a19;
-}
-
-    </style>
+    <link rel="stylesheet" href="../../public/assets/css/menu.css">
 </head>
 
 <body>
@@ -170,9 +94,10 @@
     </main>
 
     <footer>
-        <?php include 'src/components/footer.php'; ?>
+        <?php include '../components/footer.php'; ?>
     </footer>
 
 </body>
 
 </html>
+
