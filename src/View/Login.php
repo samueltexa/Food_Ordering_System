@@ -13,12 +13,12 @@
     <div class="container" id="container">
         <!-- login form -->
         <div class="form-container sign-in-container">
-            <form id="login-form">
+            <form id="login-form" method="POST" action="../../config/login_user.php">
                 <h1>Sign in</h1>
                 <img class="logo" src="../../public/images/logo.png">
-                <input type="user" id="login_username" placeholder="Username or email" />
+                <input type="text" id="login_username" name="username" placeholder="Username or email" />
                 <div class="error-message" id="username_error_message"></div>
-                <input type="password" id="login_password" placeholder="Password" />
+                <input type="password" id="login_password" name="password" placeholder="Password" />
                 <div class="error-message" id="password_error_message"></div>
                 <a href="forgot_password.php">Forgot your password?</a>
                 <button type="submit" name="login">SIGN IN</button>
@@ -26,7 +26,7 @@
         </div>
         <!-- register form -->
         <div class="form-container sign-up-container">
-            <form id="sign-up-form">
+            <form id="sign-up-form"  method="POST" action="../../config/register_user.php">
                 <h1>Create Account</h1>
                 <img class="logo" src="../../public/images/logo.png">
                 <input type="text" name="username" id="register_username" placeholder="Enter username" />
@@ -35,7 +35,7 @@
                 <div class="error-message" id="email_error_message"></div>
                 <input type="password" name="password" id="register_password" placeholder="Enter password" />
                 <div class="error-message" id="register_password_error_message"></div>
-                <input type="password" name="confirm_password" id="confirm-password" placeholder="Confirm password" />
+                <input type="password" id="confirm-password" placeholder="Confirm password" />
                 <div class="error-message" id="confirm_password_error_message"></div>
                 <button type="submit" name="signup">REGISTER</button>
             </form>
