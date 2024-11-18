@@ -1,7 +1,8 @@
 <?php
-$host = 'localhost';
-$username = 'root';
-$password = '';
+// db_connection.php
+$host = 'localhost'; // or your database host
+$username = 'root'; // your MySQL username
+$password = ''; // your MySQL password
 $database = 'fooddb';
 
 // Create a connection
@@ -11,7 +12,4 @@ $conn = new mysqli($host, $username, $password, $database);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
-
-$conn->close();
 ?>
