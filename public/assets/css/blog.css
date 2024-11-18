@@ -11,7 +11,7 @@
     display: flex;
     max-width: 100%;
     margin: 10px;
-    padding: 15px;
+    padding: 10px;
 }
 
 .blog-posts {
@@ -87,6 +87,8 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 15px;
     text-align: center;
+    height: 880px;
+    overflow-y: auto;
 }
 
 .sidebar-image{
@@ -99,3 +101,65 @@ height: 2px;
 background-color: #ccc;
 margin: 10px 0;
 }
+
+.comment {
+    margin-bottom: 15px;
+}
+
+.comment-form {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.comment-input-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;  /* Aligns the elements (file upload icon and text field) horizontally */
+}
+
+.comment-input-container input {
+    width: 100%;
+    padding: 10px 10px 10px 40px; /* Added padding on the left to make space for the icon */
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+.file-upload-label {
+    position: absolute;
+    left: 10px;  /* Position the icon inside the input field on the left */
+    top: 50%;
+    transform: translateY(-50%);  /* Vertically center the icon */
+    font-size: 18px;
+    color: #f05454;
+    cursor: pointer;
+}
+
+.comment-input-container input[type="file"] {
+    display: none;  /* Hide the default file input */
+}
+
+.submit-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #f05454;
+}
+
+.submit-button:hover {
+    color: #d43f3f;
+}
+
+.comment-input-container input:focus {
+    outline: none;
+    border-color: #f05454;
+}
+
+
