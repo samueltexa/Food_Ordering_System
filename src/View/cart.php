@@ -161,7 +161,7 @@ nav ul li a {
 </head>
 
 <body>
-
+<?php include '../components/header.php'; ?>
     <main class="cart-main">
         <section class="cart-section">
             <h2>CART(4)</h2>
