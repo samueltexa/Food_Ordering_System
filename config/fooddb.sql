@@ -92,5 +92,9 @@ INSERT INTO comments (post_id, user_id, comment) VALUES
 (1, 2, 'I love avocado toast too!'),
 (1, 2, 'Looks delicious!'),
 (2, 1, 'I need to try that recipe!'),
-(3, 2, 'Pancakes are the best breakfast!');
+(3, 2, 'Pancakes are the best breakfast!'),
+(1, 2, 'Pancakes are the best breakfast!'),
+(2, 2, 'Pancakes are the best breakfast!'),
+(1, 2, 'Pancakes are the best breakfast!'),
+(2, 2, 'Pancakes are the best breakfast!');
 
