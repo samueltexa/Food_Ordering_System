@@ -2,6 +2,7 @@
 // Include the database connection
 include '../../config/db_connection.php';
 
+
 if (isset($_POST['submit'])) {
     // Check if the file was uploaded without errors
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
@@ -22,22 +23,34 @@ if (isset($_POST['submit'])) {
             // Move the uploaded file to the target directory
             if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
                 echo "File uploaded successfully!<br>";
+
                 // Insert the file path into the database
                 $imagePath = "public/images/" . $fileName;
-                $sql = "INSERT INTO images (imageName, imagePath) VALUES (?, ?)";
+                echo "Inserting image path: " . $imagePath . "<br>";  // Debug
+
+                // Prepare the SQL query to insert the image details into the database
+                $sql = "INSERT INTO images (imageName, imagePath, description) VALUES (?, ?, ?)";
 
                 // Prepare the SQL statement
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("ss", $fileName, $imagePath);
+                if ($stmt = $conn->prepare($sql)) {
+                    // Bind the parameters (fileName, imagePath, and a placeholder description)
+                    $description = '';  // Optional: Add a default description if needed
+                    $stmt->bind_param("sss", $fileName, $imagePath, $description);
 
-                if ($stmt->execute()) {
-                    echo "Image inserted into the database.";
+                    // Execute the query
+                    if ($stmt->execute()) {
+                        echo "Image inserted into the database.";
+                    } else {
+                        // Output error if execution fails
+                        echo "Error inserting image into the database: " . $stmt->error;
+                    }
+
+                    // Close the statement
+                    $stmt->close();
                 } else {
-                    echo "Error inserting image into the database.";
+                    // Output error if statement preparation fails
+                    echo "Error preparing SQL statement: " . $conn->error;
                 }
-
-                // Close the statement
-                $stmt->close();
             } else {
                 echo "Error uploading the file. Check permissions or file size.<br>";
                 echo "Move file failed. Error: " . $_FILES['image']['error'] . "<br>";
