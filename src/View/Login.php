@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../../public/assets/css/login_register.css">
+    <style>
+        .error-message {
+            color: red;
+            /* Make error messages red */
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,13 +29,22 @@
                 <div class="error-message" id="username_error_message"></div>
                 <input type="password" id="login_password" name="password" placeholder="Password" />
                 <div class="error-message" id="password_error_message"></div>
+                <!-- Display error messages dynamically -->
+                <?php if (isset($_SESSION['error_message'])): ?>
+                    <p class="error-message">
+                        <?php
+                        echo $_SESSION['error_message'];
+                        unset($_SESSION['error_message']); // Clear message after displaying
+                        ?>
+                    </p>
+                <?php endif; ?>
                 <a href="forgot_password.php">Forgot your password?</a>
                 <button type="submit" name="login">SIGN IN</button>
             </form>
         </div>
         <!-- register form -->
         <div class="form-container sign-up-container">
-            <form id="sign-up-form"  method="POST" action="../../config/register_user.php">
+            <form id="sign-up-form" method="POST" action="../../config/register_user.php">
                 <h1>Create Account</h1>
                 <img class="logo" src="../../public/images/logo.png">
                 <input type="text" name="username" id="register_username" placeholder="Enter username" />
