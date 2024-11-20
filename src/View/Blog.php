@@ -12,23 +12,26 @@
         function displayPostInSidebar(postContent, postImage, postId) {
             const sidebar = document.getElementById('sidebar-content');
             sidebar.innerHTML = `
-        <h1>Keep comments Respectful</h1>
-<hr class="separator">
-<img src="${postImage}" alt="Post Image" class="sidebar-image">
-<div class="sidebar-post-content">${postContent}</div>
-<hr class="separator">
-<div class="comment-form">
-    <div class="comment-input-container">
-        <input id="comment-text" placeholder="Write your comment..." />
-        <button id="submit-comment" class="submit-button">
-            <i class="fa fa-paper-plane"></i>
-        </button>
-    </div>
-</div>
-<hr class="separator">
-<div id="comments-container"></div>
+       <h1>Keep comments respectful</h1>
+        <hr class="separator">
+        <img src="${postImage}" alt="Post Image" class="sidebar-image">
+        <div class="sidebar-post-content">${postContent}</div>
+        <hr class="separator">
+        <div class="comment-form">
+            <form method="POST" action="post_comment.php">
+                <input type="hidden" name="post_id" value="${postId}">
+                <div class="comment-input-container">
+                    <input id="comment-text" name="comment" placeholder="Write your comment..." required />
+                    <button id="submit-comment" type="submit" class="submit-button">
+                        <i class="fa fa-paper-plane"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <hr class="separator">
+        <div id="comments-container"></div>
     `;
-            fetchComments(postId);
+    fetchComments(postId); 
         }
         function fetchComments(postId) {
             fetch(`http://localhost/Food_Ordering_System/src/View/fetch_comments.php?post_id=${postId}`)
@@ -139,7 +142,7 @@ $result = $conn->query($query);
 
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <form method="POST" action="../../config/post_blog.php">
+        <form method="POST" action="post_blog.php" enctype="multipart/form-data">
             <div class="modal-header">
                 <h2>Share Your Thoughts</h2>
                 <button type="button" class="close-btn" onclick="closeModal()">×</button>
@@ -149,9 +152,9 @@ $result = $conn->query($query);
                 <label for="file-upload" class="file-upload-label">
                     <h4>Upload Image <i class="fa fa-upload"></i></h4>
                 </label>
-                <input type="file" id="file-upload" name="file-upload" />
+                <input type="file" id="file-upload" name="image" />
             </div>
-            <button class="postBlog" type="submit">Post Blog</button>
+            <button class="postBlog" name="submit" type="submit">Post Blog</button>
         </form>
     </div>
 </div>
