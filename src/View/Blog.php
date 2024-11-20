@@ -19,10 +19,6 @@
 <hr class="separator">
 <div class="comment-form">
     <div class="comment-input-container">
-        <label for="file-upload" class="file-upload-label">
-            <i class="fa fa-upload"></i>
-        </label>
-        <input type="file" id="file-upload" style="display:none" />
         <input id="comment-text" placeholder="Write your comment..." />
         <button id="submit-comment" class="submit-button">
             <i class="fa fa-paper-plane"></i>
@@ -71,12 +67,12 @@
         }
     </script>
 </head>
-    <?php
-    include '../components/header.php';
-    include '../../config/db_connection.php';
+<?php
+include '../components/header.php';
+include '../../config/db_connection.php';
 
-    // Query to fetch blog posts with user information and post image
-    $query = "
+// Query to fetch blog posts with user information and post image
+$query = "
         SELECT 
             blogPosts.id AS post_id, 
             blogPosts.post, 
@@ -98,49 +94,86 @@
         GROUP BY
             blogPosts.id, user.id";
 
-    $result = $conn->query($query);
-    ?>
+$result = $conn->query($query);
+?>
 <div class="search_container">
     <div class="search">
         <input id="comment-text" class="search-input" placeholder="Search for a comment..." />
         <i class="fas fa-search search-icon"></i>
     </div>
-    <button id="post-blog-button" class="post-blog-button">Post Blog</button>
+    <button class="post-blog-button" onclick="openModal('')">Post Blog</button>
 </div>
-    <div class="container">
-        <div class="blog-posts">
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $imageUrl = "http://localhost/Food_Ordering_System/" . $row['image'];
-                    $userImage = !empty($row['image']) ? $imageUrl : '../../public/images/logo.png';
-                    $postImage = !empty($row['postImage']) ? "http://localhost/Food_Ordering_System/" . $row['postImage'] : '../../public/images/default_post_image.jpg';
-                    echo "<div class='blog-post' onclick='displayPostInSidebar(\"" . htmlspecialchars($row['post']) . "\", \"" . htmlspecialchars($postImage) . "\", " . $row['post_id'] . ")'>";
-                    echo "    <div class='user-info'>";
-                    echo "        <img src='" . htmlspecialchars($userImage) . "' alt=' '>";
-                    echo "        <span>@" . htmlspecialchars($row['username']) . "</span>";
-                    echo "    </div>";
-                    echo "    <div class='blog-content'>";
-                    echo "        <h3>" . htmlspecialchars($row['post']) . "</h3>";
-                    echo "    </div>";
-                    echo "    <div class='interactions'>";
-                    echo "        <span>" . htmlspecialchars($row['likes']) . " <i class='fa fa-thumbs-up'></i></span>";
-                    echo "        <span>" . htmlspecialchars($row['comment_count']) . " <i class='fa fa-comment'></i></span>";
-                    echo "        <span><i class='fa fa-share fa-lg'></i></span>";
-                    echo "    </div>";
-                    echo "</div>";
-                }
-            } else {
-                echo "<p>No blog posts available.</p>";
+<div class="container">
+    <div class="blog-posts">
+        <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $imageUrl = "http://localhost/Food_Ordering_System/" . $row['image'];
+                $userImage = !empty($row['image']) ? $imageUrl : '../../public/images/logo.png';
+                $postImage = !empty($row['postImage']) ? "http://localhost/Food_Ordering_System/" . $row['postImage'] : '../../public/images/default_post_image.jpg';
+                echo "<div class='blog-post' onclick='displayPostInSidebar(\"" . htmlspecialchars($row['post']) . "\", \"" . htmlspecialchars($postImage) . "\", " . $row['post_id'] . ")'>";
+                echo "    <div class='user-info'>";
+                echo "        <img src='" . htmlspecialchars($userImage) . "' alt=' '>";
+                echo "        <span>@" . htmlspecialchars($row['username']) . "</span>";
+                echo "    </div>";
+                echo "    <div class='blog-content'>";
+                echo "        <h3>" . htmlspecialchars($row['post']) . "</h3>";
+                echo "    </div>";
+                echo "    <div class='interactions'>";
+                echo "        <span>" . htmlspecialchars($row['likes']) . " <i class='fa fa-thumbs-up'></i></span>";
+                echo "        <span>" . htmlspecialchars($row['comment_count']) . " <i class='fa fa-comment'></i></span>";
+                echo "        <span><i class='fa fa-share fa-lg'></i></span>";
+                echo "    </div>";
+                echo "</div>";
             }
-            ?>
-        </div>
-        <div class="sidebar">
-            <div id="sidebar-content">
-            </div>
+        } else {
+            echo "<p>No blog posts available.</p>";
+        }
+        ?>
+    </div>
+    <div class="sidebar">
+        <div id="sidebar-content">
         </div>
     </div>
-    </body>
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <form method="POST" action="../../config/post_blog.php">
+            <div class="modal-header">
+                <h2>Share Your Thoughts</h2>
+                <button type="button" class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <textarea id="post-text" name="post_text" placeholder="Write your post..." rows="4" required></textarea>
+            <div class="file-upload-container">
+                <label for="file-upload" class="file-upload-label">
+                    <h4>Upload Image <i class="fa fa-upload"></i></h4>
+                </label>
+                <input type="file" id="file-upload" name="file-upload" />
+            </div>
+            <button class="postBlog" type="submit">Post Blog</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openModal(title, description, imagePath) {
+        document.getElementById('myModal').style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = "none";
+    }
+
+    // Close the modal when clicking outside of it
+    window.onclick = function (event) {
+        const modal = document.getElementById('myModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
+</body>
 
 </html>
 <?php
