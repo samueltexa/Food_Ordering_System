@@ -52,14 +52,14 @@ CREATE TABLE menu (
 
 -- Insert menu items
 INSERT INTO menu (name, price, description, image_id) VALUES
-('Pancakes', 15000.00, 'Contains wheat, milk, and eggs.', 1), -- Assuming image_id 1 for Pancakes
-('Toasted Bread', 10000.00, 'Crispy brown toasted bread served with butter.', 2), -- Assuming image_id 2 for Toasted Bread
-('Fried Eggs', 10000.00, 'Over-easy fried eggs, served with a hot cup of tea.', 3), -- Assuming image_id 3 for Fried Eggs
-('Fried Rice', 75000.00, 'Savory fried rice with vegetables, eggs, and beef.', 4), -- Assuming image_id 4 for Fried Rice
-('Katoogo', 50000.00, 'A traditional dish with plantains, beans, and meat.', 5), -- Assuming image_id 5 for Katoogo
-('Rolex', 25000.00, 'Rolled chapati filled with eggs, tomatoes, and onions.', 6), -- Assuming image_id 6 for Rolex
-('Spaghetti', 65000.00, 'Classic spaghetti with rich tomato sauce, seasoned with spices.', 7), -- Assuming image_id 7 for Spaghetti
-('Fried Chicken', 100000.00, 'Crispy fried chicken pieces served with rice.', 8); -- Assuming image_id 8 for Fried Chicken
+('Pancakes', 15000.00, 'Contains wheat, milk, and eggs.', 1),
+('Toasted Bread', 10000.00, 'Crispy brown toasted bread served with butter.', 2),
+('Fried Eggs', 10000.00, 'Over-easy fried eggs, served with a hot cup of tea.', 3),
+('Fried Rice', 75000.00, 'Savory fried rice with vegetables, eggs, and beef.', 4),
+('Katoogo', 50000.00, 'A traditional dish with plantains, beans, and meat.', 5),
+('Rolex', 25000.00, 'Rolled chapati filled with eggs, tomatoes, and onions.', 6),
+('Spaghetti', 65000.00, 'Classic spaghetti with rich tomato sauce, seasoned with spices.', 7),
+('Fried Chicken', 100000.00, 'Crispy fried chicken pieces served with rice.', 8);
 
 -- Create the blogPosts table
 CREATE TABLE blogPosts (
@@ -98,3 +98,22 @@ INSERT INTO comments (post_id, user_id, comment) VALUES
 (1, 2, 'Pancakes are the best breakfast!'),
 (2, 2, 'Pancakes are the best breakfast!');
 
+-- Likes
+-- CREATE TABLE likes (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     user_id INT NOT NULL,
+--     post_id INT NOT NULL,
+--     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+--     FOREIGN KEY (post_id) REFERENCES blogPosts(id) ON DELETE CASCADE,
+--     UNIQUE KEY unique_like (user_id, post_id)
+-- );
+
+
+CREATE TABLE user_likes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    post_id INT NOT NULL,
+    UNIQUE (user_id, post_id),
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES blogPosts(id) ON DELETE CASCADE
+);
