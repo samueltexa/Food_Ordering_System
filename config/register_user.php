@@ -18,7 +18,7 @@ if (isset($_POST['signup'])) {
     $query = "INSERT INTO user (username, email, password) VALUES ('$username', '$email', '$hashedPassword')";
     if ($conn->query($query) === TRUE) {
         // Registration successful, redirect to login page or another page
-        header("Location: index.php");
+        header("Location: /Food_Ordering_System/");
         exit();
     } else {
         // Handle errors
