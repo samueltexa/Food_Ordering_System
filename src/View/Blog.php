@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +32,7 @@
         <hr class="separator">
         <div id="comments-container"></div>
     `;
-    fetchComments(postId); 
+            fetchComments(postId);
         }
         function fetchComments(postId) {
             fetch(`http://localhost/Food_Ordering_System/src/View/fetch_comments.php?post_id=${postId}`)
@@ -69,6 +70,14 @@
                 });
         }
     </script>
+    <style>
+        .error-message {
+            color: red;
+            font-size: 30px;
+            margin-top: 5px;
+            text-align: center;
+        }
+    </style>
 </head>
 <?php
 include '../components/header.php';
@@ -106,6 +115,15 @@ $result = $conn->query($query);
     </div>
     <button class="post-blog-button" onclick="openModal('')">Post Blog</button>
 </div>
+<!-- Display error messages dynamically -->
+<?php if (isset($_SESSION['error_message'])): ?>
+    <p class="error-message">
+        <?php
+        echo $_SESSION['error_message'];
+        unset($_SESSION['error_message']);
+        ?>
+    </p>
+<?php endif; ?>
 <div class="container">
     <div class="blog-posts">
         <?php
@@ -152,7 +170,7 @@ $result = $conn->query($query);
                 <label for="file-upload" class="file-upload-label">
                     <h4>Upload Image <i class="fa fa-upload"></i></h4>
                 </label>
-                <input type="file" id="file-upload" name="image" />
+                <input type="file" id="file-upload" name="image" required />
             </div>
             <button class="postBlog" name="submit" type="submit">Post Blog</button>
         </form>
