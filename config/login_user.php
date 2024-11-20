@@ -29,10 +29,14 @@ if (isset($_POST['login'])) {
             header("Location: /Food_Ordering_System/");
             exit();
         } else {
-            $error_message = "Invalid password.";
+            $_SESSION['$error_message'] = "Invalid password.";
+            // Redirect to login again
+            header("Location: /Food_Ordering_System/src/View/Login.php");
         }
     } else {
-        $error_message = "No user found with that username/email.";
+        $_SESSION['error_message'] = "Wrong username or password";
+            // Redirect to login again
+        header("Location: /Food_Ordering_System/src/View/Login.php");
     }
 }
 
