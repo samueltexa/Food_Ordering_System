@@ -71,8 +71,6 @@
         }
     </script>
 </head>
-
-<body>
     <?php
     include '../components/header.php';
     include '../../config/db_connection.php';
@@ -102,6 +100,13 @@
 
     $result = $conn->query($query);
     ?>
+<div class="search_container">
+    <div class="search">
+        <input id="comment-text" class="search-input" placeholder="Search for a comment..." />
+        <i class="fas fa-search search-icon"></i>
+    </div>
+    <button id="post-blog-button" class="post-blog-button">Post Blog</button>
+</div>
     <div class="container">
         <div class="blog-posts">
             <?php
@@ -135,7 +140,7 @@
             </div>
         </div>
     </div>
-</body>
+    </body>
 
 </html>
 <?php
