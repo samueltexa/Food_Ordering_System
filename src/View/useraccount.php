@@ -1,64 +1,61 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account</title>
+    <title>Update Account</title>
     <link rel="stylesheet" href="../../public/assets/css/useraccount.css">
+
+    <style>
+        .error-message {
+            color: green;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
 </head>
-
 <body>
-
     <div class="form-container">
-
-        <div class="content">
-            <header>
-                <h1>Update User Profile</h1>
-            </header>
-            <img class="user_image" id="user_image" src="profile.jpeg" />
-        </div>
         <div class="form-area">
             <div>
-                <form id="user-form">
+                <form id="user-form" action="update_account.php" method="POST" enctype="multipart/form-data">
                     <fieldset>
-                        <legend>User Information</legend>
+                        <legend>Update User Information</legend>
                         <div class="form-row">
                             <div class="fields">
                                 <label for="first-name">First Name</label>
-                                <input type="text" id="first-name" placeholder="First Name">
+                                <input type="text" name="first_name" id="first-name" placeholder="First Name" required>
                             </div>
                             <div class="fields">
                                 <label for="last-name">Last Name</label>
-                                <input type="text" id="last-name" placeholder="Last Name">
+                                <input type="text" name="last_name" id="last-name" placeholder="Last Name" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="fields">
                                 <label for="username">Username</label>
-                                <input type="text" id="username" placeholder="Username">
+                                <input type="text" name="username" id="username" placeholder="Username" required>
                             </div>
                             <div class="fields">
                                 <label for="email">Email Address</label>
-                                <input type="email" id="email" placeholder="Email Address">
+                                <input type="email" name="email" id="email" placeholder="Email Address" required>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="fields">
-                                <label for="email">Address</label>
-                                <input type="text" id="address" placeholder="Address">
-                            </div>
                             <div class="fields">
                                 <label for="photo">Photo</label>
-                                <input type="file" id="photo">
+                                <input type="file" name="photo" id="photo">
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="fields">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" placeholder="Confirm your Password">
-                                <div class="error-message" id="password_error_message"></div>
-                            </div>
+                            <!-- Display error messages dynamically -->
+                            <?php if (isset($_SESSION['error_message'])): ?>
+                                <p class="error-message">
+                                    <?php
+                                    echo $_SESSION['error_message'];
+                                    unset($_SESSION['error_message']); // Clear message after displaying
+                                    ?>
+                                </p>
+                            <?php endif; ?>
                         </div>
                     </fieldset>
                     <button type="submit" class="update-btn">Update</button>
@@ -66,7 +63,5 @@
             </div>
         </div>
     </div>
-
 </body>
-
 </html>
