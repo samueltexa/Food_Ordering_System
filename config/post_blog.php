@@ -1,73 +1,73 @@
 <?php
-// Start session to access the logged-in user's information
+// Include the database connection
+include '../../config/db_connection.php';
+
+// Ensure the user is logged in before allowing the upload
 session_start();
-
-// Include database connection
-include 'db_connection.php';
-
-// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    echo "You must be logged in to post a blog.";
-    exit;
+    echo "You must be logged in to upload images.";
+    exit();
 }
 
-// Get the logged-in user's ID
-$user_id = $_SESSION['user_id'];
+if (isset($_POST['submit'])) {
+    // Capture the post text
+    $postText = $_POST['post_text'];
 
-// Get form data
-$post_text = isset($_POST['post_text']) ? htmlspecialchars($_POST['post_text']) : '';
-$post_image = null;
+    // Check if the file was uploaded without errors
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        // Define the allowed file types
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        $fileType = $_FILES['image']['type'];
 
-if (isset($_FILES['post_image'])) {
-    // Handle image upload if provided
-    $target_dir = "../../public/images/";
-    $target_file = $target_dir . basename($_FILES["post_image"]["name"]);
-    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-    
-    // Validate file is an image
-    $check = getimagesize($_FILES["post_image"]["tmp_name"]);
-    if ($check === false) {
-        echo "File is not an image.";
-        exit;
-    }
+        // Validate the file type
+        if (in_array($fileType, $allowedTypes)) {
+            // Define the target directory and the file name
+            $targetDir = "../../public/images/";  // Adjust path as needed
+            $fileName = basename($_FILES['image']['name']);
+            $targetFile = $targetDir . $fileName;
 
-    // Validate file extension (JPEG, PNG, GIF)
-    $allowed_types = ['jpeg', 'jpg', 'png', 'gif'];
-    if (!in_array($imageFileType, $allowed_types)) {
-        echo "Only JPEG, PNG, and GIF images are allowed.";
-        exit;
-    }
+            // Move the uploaded file to the target directory
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+                echo "File uploaded successfully!<br>";
 
-    // Check file size (e.g., max 5MB)
-    if ($_FILES["post_image"]["size"] > 5000000) {
-        echo "Sorry, your file is too large. Maximum file size is 5MB.";
-        exit;
-    }
+                // Insert the file path into the database
+                $imagePath = "public/images/" . $fileName;
 
-    // Move the uploaded file to the server directory
-    if (move_uploaded_file($_FILES["post_image"]["tmp_name"], $target_file)) {
-        $post_image = "public/images/" . basename($_FILES["post_image"]["name"]);
+                // Get the logged-in user's ID from the session
+                $userId = $_SESSION['user_id'];
+
+                // Prepare the SQL query to insert the post text and image path into the database
+                $sql = "INSERT INTO blogPosts (user_id, post, postImage) VALUES (?, ?, ?)";
+
+                // Prepare the SQL statement
+                if ($stmt = $conn->prepare($sql)) {
+                    $stmt->bind_param("iss", $userId, $postText, $imagePath);
+
+                    // Execute the query
+                    if ($stmt->execute()) {
+                        echo "Image and post inserted into the database successfully.";
+                    } else {
+                        echo "Error inserting image and post into the database: " . $stmt->error;
+                    }
+
+                    // Close the statement
+                    $stmt->close();
+                } else {
+                    // Output error if statement preparation fails
+                    echo "Error preparing SQL statement: " . $conn->error;
+                }
+            } else {
+                echo "Error uploading the file. Check permissions or file size.<br>";
+                echo "Move file failed. Error: " . $_FILES['image']['error'] . "<br>";
+            }
+        } else {
+            echo "Only image files (JPEG, PNG, GIF) are allowed.";
+        }
     } else {
-        echo "Sorry, there was an error uploading your file.";
-        exit;
+        echo "No file uploaded or an error occurred. Error code: " . $_FILES['image']['error'];
     }
 }
 
-// Insert the new blog post into the database
-if (!empty($post_text)) {
-    $query = "INSERT INTO blogPosts (user_id, post, postImage) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("iss", $user_id, $post_text, $post_image);
-    
-    if ($stmt->execute()) {
-        echo "Blog post successfully added.";
-    } else {
-        echo "Error: " . $stmt->error;
-    }
-} else {
-    echo "Please write something in your post.";
-}
-
-// Close database connection
+// Close the connection
 $conn->close();
 ?>
