@@ -10,10 +10,6 @@ CREATE TABLE user (
     image VARCHAR(255)
 );
 
-INSERT INTO user (firstName, lastName, username, email, password, address, image) VALUES
-('John', 'Doe', 'johndoe', 'john@example.com', 'password123', '123 Main St', 'public/images/chicken.jpg'),
-('Jane', 'Smith', 'janesmith', 'jane@example.com', 'password123', '456 Elm St', 'public/images/chicken.jpg');
-
 
 -- Create the images table
 CREATE TABLE images (
@@ -71,12 +67,6 @@ CREATE TABLE blogPosts (
     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
--- Insert sample blog posts
-INSERT INTO blogPosts (user_id, post, likes, postImage) VALUES
-(1, 'Just had the best avocado toast ever! #foodie', 10, 'public/images/chicken.jpg'),
-(2, 'Spicy chicken wings are my favorite snack!', 5, 'public/images/chicken.jpg'),
-(1, 'Can’t wait to try the new pancakes recipe!', 8, 'public/images/chicken.jpg');
-
 -- Create the comments table
 CREATE TABLE comments (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -86,27 +76,6 @@ CREATE TABLE comments (
     FOREIGN KEY (post_id) REFERENCES blogPosts(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
-
--- Insert sample comments
-INSERT INTO comments (post_id, user_id, comment) VALUES
-(1, 2, 'I love avocado toast too!'),
-(1, 2, 'Looks delicious!'),
-(2, 1, 'I need to try that recipe!'),
-(3, 2, 'Pancakes are the best breakfast!'),
-(1, 2, 'Pancakes are the best breakfast!'),
-(2, 2, 'Pancakes are the best breakfast!'),
-(1, 2, 'Pancakes are the best breakfast!'),
-(2, 2, 'Pancakes are the best breakfast!');
-
--- Likes
--- CREATE TABLE likes (
---     id INT AUTO_INCREMENT PRIMARY KEY,
---     user_id INT NOT NULL,
---     post_id INT NOT NULL,
---     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
---     FOREIGN KEY (post_id) REFERENCES blogPosts(id) ON DELETE CASCADE,
---     UNIQUE KEY unique_like (user_id, post_id)
--- );
 
 
 CREATE TABLE user_likes (
