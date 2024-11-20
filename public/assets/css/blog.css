@@ -115,12 +115,12 @@ margin: 10px 0;
     position: relative;
     width: 100%;
     display: flex;
-    align-items: center;  /* Aligns the elements (file upload icon and text field) horizontally */
+    align-items: center;
 }
 
 .comment-input-container input {
     width: 100%;
-    padding: 10px 10px 10px 40px; /* Added padding on the left to make space for the icon */
+    padding: 10px 10px 10px 40px;
     font-size: 14px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -129,16 +129,16 @@ margin: 10px 0;
 
 .file-upload-label {
     position: absolute;
-    left: 10px;  /* Position the icon inside the input field on the left */
+    left: 10px;
     top: 50%;
-    transform: translateY(-50%);  /* Vertically center the icon */
+    transform: translateY(-50%);
     font-size: 18px;
     color: #f05454;
     cursor: pointer;
 }
 
 .comment-input-container input[type="file"] {
-    display: none;  /* Hide the default file input */
+    display: none;
 }
 
 .submit-button {
@@ -160,6 +160,63 @@ margin: 10px 0;
 .comment-input-container input:focus {
     outline: none;
     border-color: #f05454;
+}
+
+.search_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+    margin: 10px auto;
+}
+
+.search {
+    position: relative;
+    flex: 1;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #999;
+    cursor: pointer;
+}
+
+.search-icon:hover {
+    color: #007bff;
+}
+
+.post-blog-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.post-blog-button:hover {
+    background-color: #0056b3;
 }
 
 
