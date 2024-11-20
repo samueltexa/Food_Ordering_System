@@ -21,8 +21,8 @@
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="dropdown-content">
-                    <a href="#">About Us</a>
-                    <a href="#">Contact us</a>
+                    <a href="src/View/aboutus.php">About Us</a>
+                    <a href="mailto:woolardsamuel@gmail.com">Contact us</a>
                 </div>
             </div>
             <h2>Delicious Meals Delivered To You</h2>
