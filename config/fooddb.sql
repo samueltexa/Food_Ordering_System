@@ -47,7 +47,9 @@ CREATE TABLE menu (
     price DECIMAL(10, 2) NOT NULL,
     description TEXT NOT NULL,
     image_id INT,
-    FOREIGN KEY (image_id) REFERENCES images(id) ON DELETE CASCADE
+    FOREIGN KEY (image_id) REFERENCES images(id) ON DELETE CASCADE,
+    category VARCHAR(50) NOT NULL DEFAULT 'Main',
+    available BOOLEAN DEFAULT TRUE
 );
 
 -- Insert menu items
@@ -98,3 +100,22 @@ INSERT INTO comments (post_id, user_id, comment) VALUES
 (1, 2, 'Pancakes are the best breakfast!'),
 (2, 2, 'Pancakes are the best breakfast!');
 
+-- creating the Orders and OderItems table 
+
+-- Orders table
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    total_price DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    order_status VARCHAR(20) DEFAULT 'pending'
+);
+
+-- Order Items table
+CREATE TABLE order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    dish_name VARCHAR(100) NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id)
+);
